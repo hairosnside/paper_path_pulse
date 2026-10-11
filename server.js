@@ -9,10 +9,11 @@ const crypto = require('crypto');
 const { execFile } = require('child_process');
 const { URL } = require('url');
 const { Correlator, DEFAULT_FILTER } = require('./parser');
+const { parseSections } = require('./ntcli-parser');
 
 const APP_DIR = __dirname;
 const PORT = Number(process.env.PORT || 8787);
-const LISTEN_HOST = process.env.LISTEN_HOST || '10.194.9.42';
+const LISTEN_HOST = process.env.LISTEN_HOST || '127.0.0.1';
 const CONFIG_FILE = path.join(APP_DIR, 'p3-config.json');
 
 const defaultConfig = {
@@ -135,27 +136,6 @@ const NTCLI_COMMAND = [
   'echo "=== Destination ==="',
   'ntcli get Destination'
 ].join('; ');
-
-function parseJsonish(value) {
-  const trimmed = String(value || '').trim();
-  if (!trimmed) return null;
-  try { return JSON.parse(trimmed); } catch { return trimmed; }
-}
-
-function parseSections(stdout) {
-  const names = ['Settings', 'Status', 'Supplies', 'Destination'];
-  const result = {};
-  for (let i = 0; i < names.length; i++) {
-    const name = names[i];
-    const start = stdout.indexOf(`=== ${name} ===`);
-    const endMarker = names[i + 1] ? `=== ${names[i + 1]} ===` : null;
-    if (start < 0) { result[name.toLowerCase()] = null; continue; }
-    const from = start + (`=== ${name} ===`).length;
-    const end = endMarker ? stdout.indexOf(endMarker, from) : stdout.length;
-    result[name.toLowerCase()] = parseJsonish(stdout.slice(from, end < 0 ? stdout.length : end));
-  }
-  return result;
-}
 
 async function fetchNtcli(ip) {
   const opts = [
@@ -354,6 +334,14 @@ function broadcast(payload) {
   }
 }
 
+function getNtcliState() {
+  return ntcliState;
+}
+
+function getLiveSnapshot() {
+  return tailer?.snapshot() || { sourceStatus: 'OFFLINE', pages: [], events: [], stats: {} };
+}
+
 function addCorsAndNoCache(res) {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -388,7 +376,7 @@ function handleWsUpgrade(req, socket) {
   socket.write(headers.join('\r\n') + '\r\n\r\n');
   socket.setTimeout(0);
   wsClients.add(socket);
-  sendWsText(socket, JSON.stringify({ type: 'snapshot', live: tailer?.snapshot(), ntcli: ntcliState }));
+  sendWsText(socket, JSON.stringify({ type: 'snapshot', live: getLiveSnapshot(), ntcli: getNtcliState() }));
   socket.on('close', () => wsClients.delete(socket));
   socket.on('error', () => wsClients.delete(socket));
   socket.on('data', buffer => {
@@ -420,8 +408,8 @@ async function handle(req, res) {
   if (req.method === 'GET' && url.pathname === '/api/health') {
     send(res, 200, {
       ok: true, service: 'P3 Paper Path Pulse', timestamp: new Date().toISOString(),
-      live: tailer?.snapshot()?.sourceStatus || 'OFFLINE',
-      ntcli: ntcliState.state
+      live: getLiveSnapshot().sourceStatus || 'OFFLINE',
+      ntcli: getNtcliState().state
     }); return;
   }
 
@@ -443,20 +431,21 @@ async function handle(req, res) {
 
   if (req.method === 'GET' && url.pathname === '/api/ntcli') {
     await pollNtcli();
-    send(res, ntcliState.state === 'ERROR' ? 502 : 200, ntcliState);
+    const result = getNtcliState();
+    send(res, result.state === 'ERROR' ? 502 : 200, result);
     return;
   }
 
   if (req.method === 'GET' && url.pathname === '/api/live/summary') {
-    const snap = tailer?.snapshot() || { sourceStatus: 'OFFLINE', pages: [], events: [], stats: {} };
+    const snap = getLiveSnapshot();
     const pages = snap.pages || [];
     const current = pages[0] || null;
     const currentStage = extractCurrentStage(snap);
     const latestIpe = [...(snap.events || [])].reverse().find(e => e.type === 'pageStage' && e.ipeMm != null) || null;
     const latestQ = [...(snap.events || [])].reverse().find(e => e.type === 'qdmg') || null;
     send(res, 200, {
-      ok: true, sourceStatus: snap.sourceStatus, log: { path: config.liveLogPath, lastReadAt: snap.lastReadAt, error: snap.error, stats: snap.stats },
-      ntcli: ntcliState,
+      ok: true, sourceStatus: snap.sourceStatus, log: { path: snap.path || config.liveLogPath, lastReadAt: snap.lastReadAt, error: snap.error, stats: snap.stats },
+      ntcli: getNtcliState(),
       currentPage: current?.pageIdHex || null,
       currentStage,
       latestIpe,
@@ -467,13 +456,13 @@ async function handle(req, res) {
   }
 
   if (req.method === 'GET' && url.pathname === '/api/live/pages') {
-    const snap=tailer?.snapshot() || {sourceStatus:'OFFLINE',pages:[],events:[],stats:{}};
+    const snap=getLiveSnapshot();
     const limit=Math.max(1,Math.min(500,Number(url.searchParams.get('limit')||200)));
     send(res, 200, { ok: true, ...snap, pages:(snap.pages||[]).slice(0,limit) }); return;
   }
 
   if (req.method === 'GET' && url.pathname === '/api/live/events') {
-    send(res, 200, { ok: true, events: tailer?.snapshot()?.events || [] }); return;
+    send(res, 200, { ok: true, events: getLiveSnapshot().events || [] }); return;
   }
 
   if (req.method === 'GET' && url.pathname.startsWith('/api/live/page/')) {
@@ -491,7 +480,7 @@ async function handle(req, res) {
       'Access-Control-Allow-Origin': '*'
     });
     sseClients.add(res);
-    res.write(`data: ${JSON.stringify({ type: 'snapshot', live: tailer?.snapshot(), ntcli: ntcliState })}\n\n`);
+    res.write(`data: ${JSON.stringify({ type: 'snapshot', live: getLiveSnapshot(), ntcli: getNtcliState() })}\n\n`);
     req.on('close', () => sseClients.delete(res));
     return;
   }

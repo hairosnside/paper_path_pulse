@@ -1,6 +1,7 @@
 'use strict';
 
 const { execFile } = require('child_process');
+const { parseSections } = require('./ntcli-parser');
 
 const DEFAULT_PASSWORD = process.env.SSH_PASSWORD || 'il2w4lilky';
 
@@ -38,31 +39,6 @@ function runCommand(executable, args, timeoutMs) {
       resolve(String(stdout || ''));
     });
   });
-}
-
-function parseJsonish(value) {
-  const trimmed = String(value || '').trim();
-  if (!trimmed) return null;
-  try { return JSON.parse(trimmed); } catch (_) { return trimmed; }
-}
-
-function parseSections(stdout) {
-  const names = ['Settings', 'Status', 'Supplies', 'Destination'];
-  const result = {};
-  for (let i = 0; i < names.length; i += 1) {
-    const name = names[i];
-    const marker = `=== ${name} ===`;
-    const start = stdout.indexOf(marker);
-    const nextMarker = names[i + 1] ? `=== ${names[i + 1]} ===` : null;
-    if (start < 0) {
-      result[name.toLowerCase()] = null;
-      continue;
-    }
-    const from = start + marker.length;
-    const end = nextMarker ? stdout.indexOf(nextMarker, from) : stdout.length;
-    result[name.toLowerCase()] = parseJsonish(stdout.slice(from, end < 0 ? stdout.length : end));
-  }
-  return result;
 }
 
 async function fetchNtcli(printerIp, options) {

@@ -14,6 +14,8 @@ Production-style paper-path diagnostics console built from the supplied P3 speci
 - Printer Entry remains an **event** when the source provides no numeric IPE; when a real numeric Printer Entry IPE exists, P3 plots it as measured data.
 - Dashboard now keeps a **Page history** strip, previous/next page navigation, and a scrollable stack of previous page timelines.
 - Selecting a historical page keeps that page selected across live refreshes and opens its complete details/traces.
+- Added a **Node Tree** tab with searchable, expandable Settings, Status, Supplies, and Destination cards populated from the live NTCLI response. Cards refresh only when section values change.
+- NTCLI response parsing accepts the printer's trailing-comma JSON and `<hex:...>` value format so the dashboard can display structured device details.
 - Added `test.js` regression checks for the static regex, page correlation, 2ndXfer→next Printer Entry transitions, Page 0x0A lifecycle, SLPQ and QDMG attachment.
 
 ## Run
@@ -43,6 +45,12 @@ P3_LOG_PATH=/path/to/printer.log
 
 ```bash
 node test.js
+```
+
+NTCLI response parsing can be checked against the supplied examples with:
+
+```bash
+node test-ntcli-parser.js
 ```
 
 To test a different corpus:
