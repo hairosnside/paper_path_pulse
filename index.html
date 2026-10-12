@@ -63,8 +63,12 @@ main{min-width:0}.topbar{min-height:72px;background:var(--surface);border-bottom
 .page-history-select{width:min(100%,260px);min-width:150px;padding:8px 34px 8px 11px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);font:700 11px ui-monospace,monospace;box-shadow:0 2px 7px rgba(0,0,0,.04);transition:border-color .16s,box-shadow .16s}
 .page-history-select:focus{outline:0;border-color:var(--red);box-shadow:0 0 0 3px rgba(200,16,46,.12)}
 .timeline-history{max-height:clamp(180px,32vh,360px);overflow:auto;padding-right:4px;scroll-behavior:smooth}.history-page{padding:11px 0 13px;border-top:1px solid var(--border)}.history-page:first-child{border-top:0}.history-page-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:7px;cursor:pointer}.history-page-head b{font:800 11px ui-monospace,monospace}.history-page-head .history-meta{font-size:9px;color:var(--muted)}.history-page.active .history-page-head b{color:var(--red)}.timeline-wrap{overflow:auto;overscroll-behavior-x:contain}.timeline{min-width:min(720px,100%)}.time-grid{display:grid;grid-template-columns:118px 1fr;gap:0}.time-head{grid-column:2;position:relative;height:30px;border-bottom:1px solid var(--border)}.time-label{font-size:10px;color:var(--muted);padding:7px 8px 0}.axis-tick{position:absolute;top:0;height:100%;border-left:1px dashed var(--border);font-size:9px;color:var(--muted);padding:3px 0 0 5px}.lane{display:grid;grid-template-columns:118px 1fr;align-items:center;min-height:46px}.lane-name{font-size:11px;color:var(--muted);font-weight:700;padding-right:10px}.lane-track{position:relative;height:28px;border-bottom:1px solid var(--border)}.event-dot{position:absolute;top:7px;width:14px;height:14px;border-radius:50%;background:var(--red);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--red);transform:translateX(-50%);z-index:2}.event-dot.nominal{background:var(--green);box-shadow:0 0 0 1px var(--green)}.event-dot.early{background:#8f5a9f;box-shadow:0 0 0 1px #8f5a9f}.event-dot.unknown{background:var(--muted);box-shadow:0 0 0 1px var(--muted)}.startline,.endline{position:absolute;top:0;height:100%;width:2px;background:var(--red);opacity:.28}.endline{background:var(--text);opacity:.18}
+.timeline{position:relative}.timeline-guide{position:absolute;z-index:4;top:30px;bottom:0;width:1px;border-left:1px dashed var(--red);pointer-events:none;opacity:0;transition:opacity .12s ease}.timeline-guide.show{opacity:.9}.timeline-guide-label{position:absolute;top:-27px;left:0;transform:translateX(-50%);padding:4px 7px;border:1px solid color-mix(in srgb,var(--red) 30%,var(--border));border-radius:7px;background:var(--surface);color:var(--text);box-shadow:0 4px 12px rgba(0,0,0,.1);font:700 9px/1.2 ui-monospace,monospace;white-space:nowrap}.event-dot{cursor:crosshair;transition:transform .12s ease,box-shadow .12s ease}.event-dot:hover,.event-dot:focus-visible{transform:translateX(-50%) scale(1.4);outline:0}
+.timeline-point-label{position:absolute;top:-7px;left:12px;padding:2px 4px;border:1px solid var(--border);border-radius:5px;background:var(--surface);color:var(--text);font:700 8px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap;box-shadow:0 2px 5px rgba(0,0,0,.06);pointer-events:none}.timeline-point-label.right{left:auto;right:12px;transform:translateX(-100%)}.timeline-guide-label{max-width:min(220px,70vw);overflow:hidden;text-overflow:ellipsis}
 .badge{display:inline-flex;align-items:center;gap:5px;padding:3px 7px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.05em;border:1px solid var(--border);background:var(--surface2)}.badge.early{color:#754381;background:rgba(117,67,129,.08);border-color:rgba(117,67,129,.16)}.badge.late{color:var(--red);background:rgba(200,16,46,.08);border-color:rgba(200,16,46,.16)}.badge.nominal{color:var(--green);background:rgba(27,127,76,.08);border-color:rgba(27,127,76,.16)}.badge.warn{color:var(--amber)}
 .trend-panel{width:100%;max-width:1280px;margin:0 auto 14px}.ipe-canvas-wrap{height:clamp(175px,21vw,235px);min-height:165px;position:relative;overflow:hidden;border-radius:10px;background:linear-gradient(180deg,rgba(127,127,127,.035),transparent 55%)}.ipe-canvas{width:100%;height:100%;display:block}.tooltip{position:fixed;display:none;z-index:100;background:#111;color:#fff;padding:9px 11px;border-radius:8px;font-size:10px;line-height:1.45;box-shadow:0 10px 25px rgba(0,0,0,.2);pointer-events:none;max-width:min(280px,calc(100vw - 24px))}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}.tool-card{padding:15px;border:1px solid var(--border);border-radius:12px;background:var(--surface);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;animation:nodeIn .2s ease both}.tool-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--red) 30%,var(--border));box-shadow:var(--shadow)}.tool-card h3{font-size:11px;color:var(--red);text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px}.tool-card p{font-size:10px;color:var(--muted);line-height:1.5;margin-top:7px}.tool-row{display:grid;grid-template-columns:minmax(92px,auto) minmax(0,1fr);align-items:center;gap:7px;margin:7px 0}.tool-row label{font-size:10px;color:var(--muted)}.tool-input{min-width:0;width:100%;padding:8px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font:11px ui-monospace,SFMono-Regular,Menlo,monospace}.tool-input:focus{outline:0;border-color:var(--red);box-shadow:0 0 0 3px rgba(200,16,46,.1)}.tool-result{min-height:19px;margin-top:6px;color:var(--red);font:700 10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}.tool-result.invalid{color:var(--amber)}.tool-hint{font-size:9px;color:var(--muted);line-height:1.5}.decode-result{font-size:10px;line-height:1.8;overflow-wrap:anywhere}.reference-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.reference-toolbar .tool-input{flex:1 1 220px}.reference-count{font-size:10px;color:var(--muted);white-space:nowrap}.reference-stack{display:grid;gap:12px}.reference-table-wrap{max-height:min(62vh,660px);overflow:auto;border:1px solid var(--border);border-radius:10px}.reference-table{width:100%;border-collapse:collapse;font-size:10px;min-width:620px}.reference-table th{position:sticky;top:0;z-index:1;background:var(--surface2);color:var(--muted);text-align:left;font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:9px;border-bottom:1px solid var(--border)}.reference-table td{padding:8px 9px;border-bottom:1px solid var(--border);vertical-align:top}.reference-table tbody tr:hover{background:var(--surface2)}.reference-code{color:var(--red);font:800 10px ui-monospace,SFMono-Regular,Menlo,monospace}.reference-empty{padding:18px;text-align:center;color:var(--muted);font-size:11px}.reference-note{font-size:10px;color:var(--muted);line-height:1.55}.reference-badge{display:inline-block;padding:2px 6px;border-radius:99px;background:var(--surface2);color:var(--muted);font-size:9px}
+.reference-stack>.card{min-width:0}
 .mini-table{width:100%;border-collapse:collapse;font-size:10px}.mini-table th{color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.06em;text-align:left;padding:6px;border-bottom:1px solid var(--border)}.mini-table td{padding:8px 6px;border-bottom:1px solid var(--border)}
 .health-list{display:grid;gap:7px;max-height:290px;overflow:auto}.health-item{padding:9px;border:1px solid var(--border);border-left:3px solid var(--red);border-radius:9px;background:var(--surface2)}.health-item.warn{border-left-color:var(--amber)}.health-item.info{border-left-color:var(--muted)}.health-item .time{font-size:9px;color:var(--muted);margin-bottom:4px}.health-item .raw{font-size:10px;line-height:1.4}
 .analyzer-drop{border:1.5px dashed #b9b9b9;border-radius:16px;padding:32px;text-align:center;background:var(--surface);transition:.16s}.analyzer-drop.drag{border-color:var(--red);background:rgba(200,16,46,.04);transform:translateY(-1px)}.drop-title{font-size:14px;font-weight:850}.drop-sub{font-size:11px;color:var(--muted);margin:6px 0 16px}.file-input{display:none}
@@ -142,6 +146,8 @@ main{min-width:0}.topbar{min-height:72px;background:var(--surface);border-bottom
       <button data-view="dashboard" class="active">◉ <span>Dashboard</span></button>
             <button data-view="node-tree">⌘ <span>Node Tree</span></button>
       <button data-view="analyzer">⌁ <span>Log Analyzer</span></button>
+      <button data-view="conversion">🔧 <span>Conversion Tools</span></button>
+      <button data-view="opcodes">⌘ <span>OPCODE Reference</span></button>
       <button data-view="settings">⚙ <span>Settings</span></button>
     </nav>
     <div class="side-footer">
@@ -279,6 +285,42 @@ main{min-width:0}.topbar{min-height:72px;background:var(--surface);border-bottom
       <div id="nodeTreeCards" class="node-cards"></div>
     </section>
 
+    <section id="view-conversion" class="view">
+      <div class="section-head"><div><h2>Conversion Tools</h2><p>Quick PaperPort calculations for transport speed, timing, gaps, page routes, and media.</p></div></div>
+      <div class="tool-grid">
+        <article class="tool-card"><h3>⚡ PTC → Speed & PPM</h3><div class="tool-row"><label for="convPTC">PTC (hex)</label><input id="convPTC" class="tool-input" inputmode="text" placeholder="79C"></div><div id="convPTCResult" class="tool-result" aria-live="polite"></div><p>Reference approximation: speed = PTC × 0.0625 mm/s; PPM ≈ speed ÷ 5.4.</p></article>
+        <article class="tool-card"><h3>⚡ SPS → Linear Speed</h3><div class="tool-row"><label for="convSPS">SPS (hex)</label><input id="convSPS" class="tool-input" placeholder="137E or 0x00137E00"></div><div id="convSPSResult" class="tool-result" aria-live="polite"></div><p>Reads the B2:B3 unsigned 16-bit value; linear speed = raw ÷ 16 mm/s.</p></article>
+        <article class="tool-card"><h3>📏 QDMG Gap Decoder</h3><div class="tool-row"><label for="convQDMG">QDMG (hex)</label><input id="convQDMG" class="tool-input" placeholder="0x00001200"></div><div id="convQDMGResult" class="tool-result" aria-live="polite"></div><p>Gap units = (B2 &lt;&lt; 8) | B3. Bytes are read from a 32-bit big-endian value.</p></article>
+        <article class="tool-card"><h3>🔢 Hex ↔ Decimal</h3><div class="tool-row"><label for="convHex">Hexadecimal</label><input id="convHex" class="tool-input" placeholder="0x79C"></div><div id="convHexResult" class="tool-result" aria-live="polite"></div><div class="tool-row"><label for="convDec">Decimal</label><input id="convDec" class="tool-input" inputmode="numeric" placeholder="1948"></div><div id="convDecResult" class="tool-result" aria-live="polite"></div></article>
+        <article class="tool-card"><h3>📐 Time ↔ Distance</h3><div class="tool-row"><label for="convSpeed">Speed (mm/s)</label><input id="convSpeed" class="tool-input" inputmode="decimal" placeholder="121.75"></div><div class="tool-row"><label for="convTime">Time (ms)</label><input id="convTime" class="tool-input" inputmode="decimal" placeholder="1890"></div><div id="convTDResult1" class="tool-result" aria-live="polite"></div><div class="tool-row"><label for="convDist">Distance (mm)</label><input id="convDist" class="tool-input" inputmode="decimal" placeholder="40"></div><div id="convTDResult2" class="tool-result" aria-live="polite"></div></article>
+        <article class="tool-card"><h3>📄 Media Size Lookup</h3><div class="tool-row"><label for="convMedia">Media code</label><input id="convMedia" class="tool-input" placeholder="LTR, A4, or 0x04"></div><div id="convMediaResult" class="tool-result" aria-live="polite"></div><p>Common ISO and North American sheet sizes.</p></article>
+        <article class="tool-card"><h3>🗺️ SLPQ Full Decode</h3><div class="tool-row"><label for="convSLPQ">SLPQ (hex)</label><input id="convSLPQ" class="tool-input" placeholder="0x00000B01"></div><div id="convSLPQResult" class="decode-result" aria-live="polite"></div></article>
+      </div>
+    </section>
+
+    <section id="view-opcodes" class="view">
+      <div class="section-head"><div><h2>OPCODE Reference</h2><p>PaperPort commands, SLPQ bit fields, and media size enums from the PaperPort Analyzer reference.</p></div></div>
+      <div class="reference-stack">
+        <article class="card panel">
+          <div class="panel-head"><h3>PaperPort Command Reference</h3><span class="tiny">paperport.h · command.h</span></div>
+          <div class="reference-toolbar"><input id="opcodeSearch" class="tool-input" type="search" placeholder="Filter by opcode, mnemonic, category, or description" aria-label="Filter OPCODE reference"><span id="opcodeCount" class="reference-count"></span></div>
+          <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>Opcode</th><th>Mnemonic</th><th>Category</th><th>Description</th><th>Multi-byte</th></tr></thead><tbody id="opcodeBody"></tbody></table></div>
+        </article>
+        <article class="card panel"><div class="panel-head"><h3>SLPQ Sub-command Reference</h3></div><div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>Field</th><th>Bits</th><th>Values</th></tr></thead><tbody>
+          <tr><td><b>Sub-command</b></td><td>B1 bits 0–3</td><td>0 = Submit New Page · 1 = Update Last Page · 2 = Remove Last Page</td></tr>
+          <tr><td><b>Staple Mode</b></td><td>B1 bits 4–7</td><td>0 = None · 1 = TopRight Diag · 2 = TopLeft Diag · 11 = TopLeft · 12 = TopDual · 13 = LeftDual · 14 = TopRight</td></tr>
+          <tr><td><b>Position</b></td><td>B2 bits 0–1</td><td>0 = Default · 1 = Left/Front · 2 = Right/Rear</td></tr>
+          <tr><td><b>Accumulate</b></td><td>B2 bit 2</td><td>0 = No · 1 = Accumulate</td></tr>
+          <tr><td><b>Hole Punch</b></td><td>B2 bits 4–6</td><td>0 = None · 1 = NA 3-hole · 2 = ISO 2-hole · 3 = US 2-hole · 4 = ISO 4-hole</td></tr>
+          <tr><td><b>Fold Mode</b></td><td>B2 bits 6–7</td><td>0 = None · 1 = Bi-fold · 2 = Booklet · 3 = C-trifold · 4 = Z-trifold · 5 = Z-fold</td></tr>
+          <tr><td><b>Page Number</b></td><td>B3</td><td>0–255 page identifier</td></tr><tr><td><b>Route</b></td><td>B4</td><td>1 = Simplex · 2 = Duplex · 3 = Finisher · 11 = TopLeft · 12 = TopDual · 13 = LeftDual · 14 = TopRight</td></tr>
+        </tbody></table></div></article>
+        <article class="card panel"><div class="panel-head"><h3>Media Size Enum Reference</h3></div><div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>Size</th><th>Dimensions (mm)</th><th>SEF / LEF</th></tr></thead><tbody>
+          <tr><td>A6</td><td>105 × 148</td><td>SEF</td></tr><tr><td>B6</td><td>128 × 182</td><td>SEF</td></tr><tr><td>A5</td><td>148 × 210</td><td>SEF / LEF</td></tr><tr><td>B5</td><td>182 × 257</td><td>SEF / LEF</td></tr><tr><td>Executive</td><td>184.2 × 266.7</td><td>SEF / LEF</td></tr><tr><td>Letter (LTR)</td><td>215.9 × 279.4</td><td>SEF / LEF</td></tr><tr><td>Legal (LGL)</td><td>215.9 × 355.6</td><td>SEF</td></tr><tr><td>Folio</td><td>209.6 × 355.6</td><td>SEF</td></tr><tr><td>A4</td><td>210 × 297</td><td>SEF / LEF</td></tr><tr><td>B4</td><td>257 × 364</td><td>SEF</td></tr><tr><td>A3</td><td>297 × 420</td><td>SEF</td></tr><tr><td>Ledger (DLT)</td><td>279.4 × 431.8</td><td>SEF</td></tr><tr><td>12×18</td><td>304.8 × 457.2</td><td>SEF</td></tr><tr><td>SRA3</td><td>320 × 450</td><td>SEF</td></tr><tr><td>Oficio</td><td>215.9 × 355.6</td><td>SEF</td></tr>
+        </tbody></table></div></article>
+      </div>
+    </section>
+
     <section id="view-settings" class="view">
       <div class="section-head"><div><h2>Settings</h2><p>Printer identity and server listener are deliberately separate.</p></div></div>
       <div class="settings-grid">
@@ -357,8 +399,8 @@ function setView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
   $('view-'+v).classList.add('active'); document.querySelector(`[data-view="${v}"]`).classList.add('active');
-  $('pageTitle').textContent = v==='dashboard'?'P3 — PAPER PATH PULSE':v==='node-tree'?'P3 — Node Tree':v==='analyzer'?'P3 — LOG ANALYZER':'P3 — SETTINGS';
-  $('topSub').textContent = v==='dashboard'?'Real-time page-path observability · evidence first':v==='node-tree'?'Live NTCLI response · printer details and device tree':v==='analyzer'?'Offline corpus analysis · immutable raw source':'Server-owned runtime configuration';
+  $('pageTitle').textContent = v==='dashboard'?'P3 — PAPER PATH PULSE':v==='node-tree'?'P3 — Node Tree':v==='analyzer'?'P3 — LOG ANALYZER':v==='conversion'?'P3 — CONVERSION TOOLS':v==='opcodes'?'P3 — OPCODE REFERENCE':'P3 — SETTINGS';
+  $('topSub').textContent = v==='dashboard'?'Real-time page-path observability · evidence first':v==='node-tree'?'Live NTCLI response · printer details and device tree':v==='analyzer'?'Offline corpus analysis · immutable raw source':v==='conversion'?'PaperPort timing, transport, and encoding utilities':v==='opcodes'?'PaperPort command, SLPQ, and media references':'Server-owned runtime configuration';
   if(v==='node-tree') renderNodeTree();
   closeSidebar(true);
 }
@@ -381,6 +423,11 @@ function closeSidebar(returnFocus=false){
 $('menuToggle').addEventListener('click',()=> $('sidebar').classList.contains('open')?closeSidebar(true):openSidebar());
 $('navBackdrop').addEventListener('click',()=>closeSidebar(true));
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+const timeline=$('timeline');
+timeline.addEventListener('pointermove',event=>showTimelineGuide(event,event.target.closest('.event-dot')));
+timeline.addEventListener('pointerleave',hideTimelineGuide);
+timeline.addEventListener('focusin',event=>{const dot=event.target.closest('.event-dot');if(dot)showTimelineGuide(event,dot)});
+timeline.addEventListener('focusout',event=>{if(event.target.closest('.event-dot'))hideTimelineGuide()});
 document.addEventListener('keydown',event=>{
  const sidebar=$('sidebar');
  if(!sidebar.classList.contains('open'))return;
@@ -394,6 +441,13 @@ document.addEventListener('keydown',event=>{
  }
 });
 $('pageHistory').addEventListener('change',event=>{if(event.target.value)selectPage(event.target.value,true)});
+$('opcodeSearch').addEventListener('input',renderOpcodeTable);
+for(const [id,handler] of [
+ ['convPTC',convertPTC],['convSPS',convertSPS],['convQDMG',convertQDMG],
+ ['convHex',convertHex],['convDec',convertDecimal],['convSpeed',convertTimeDistance],
+ ['convTime',convertTimeDistance],['convDist',convertTimeDistance],
+ ['convMedia',convertMedia],['convSLPQ',decodeSLPQ]
+])$(id).addEventListener('input',handler);
 function openSettings(){setView('settings');loadSettings()}
 function liveState(){return live?.log?.sourceStatus || 'OFFLINE'}
 async function fetchJson(url,opts){const r=await fetch(url,opts);let j={};try{j=await r.json()}catch{}if(!r.ok)throw new Error(j.error||'Request failed');return j}
@@ -423,6 +477,104 @@ function renderDashboard(){
   if(dashboardSelected && !selectedPageId) selectedPageId=dashboardSelected.pageIdHex;
   renderTimeline(dashboardSelected); renderPageSummary(); renderTrend(); renderSqpQ(); renderHealth(); renderNodeTree();
 }
+
+const OPCODES=[
+ ['0x00','SCR','Sync','Software Chip Reset','No'],['0x01','HR','Sync','Hardware Reset','No'],['0x02','SR','Sync','Status Request','No'],['0x03','QRC','Sync','Query Reset Complete','No'],['0x04','DCND','Sync','Device Count Down','No'],['0x05','CCND','Sync','Chain Count Down','No'],['0x06','QDT','Config','Query Device Type','No'],
+ ['0x09','QOC','Status','Query Option Configuration','No'],['0x0A','QDSR','Config','Query Device Status Response','No'],['0x0B','QDS1','Status','Query Device Status 1','No'],['0x0C','QNCSC','Status','Query NCSC (bin full)','No'],['0x0D','QIRCHA','Status','Query IR Change','No'],['0x0E','QIRAIS','Status','Query IR Active In Standby','No'],['0x0F','QNRWC','Misc','Query NRWC','No'],
+ ['0x10','QEQCKS','Status','Query Equipment Checks','No'],['0x11','QNT','Status','Query Number of Trays','No'],['0x12','TRRD','Misc','Tray Read Data','No'],['0x13','QCOL','Status','Query Collator Status','No'],['0x14','QPCID','Status','Query PC ID','No'],['0x15','IRC','Status','Interrupt Reason Clear','No'],['0x16','QDM','Status','Query Drive Mode','No'],
+ ['0x17','JOT','Steady','Job Output Tray','No'],['0x18','PP','Steady','Paper Pick','No'],['0x19','DMID','Steady','Document Media ID','No'],['0x1A','DCMN','Steady','Document Common Name','No'],['0x1B','PISN','Steady','Page ID Set Number','No'],['0x1C','BCS','Steady','Bypass Copy Select','No'],['0x1D','ECS','Steady','Exit Copy Select','No'],
+ ['0x1E','ILPS','Misc','Interleaf Paper Source','No'],['0x1F','RFPS','Misc','Report Feed Paper Source','No'],['0x20','DMNID','Misc','Document Media Name ID','No'],['0x21','QDTDM','Diag','Query DT Diagnostic Mode','No'],['0x22','MR','Sync','Mechanical Reset','No'],['0x23','PPASG','Steady','Paper Path Assign','No'],['0x24','SIG','Steady','Set Inter-Page Gap','No'],['0x25','QDTDM','Diag','Query DT Diagnostic Mode','No'],
+ ['0x26','QDQ','Status','Query Drive Quality','No'],['0x27','QTPL','Status','Query Tray Paper Level','No'],['0x28','PR','Steady','Page Release','No'],['0x2A','QDSMIN','Status','Query Device Status Min','No'],['0x2B','QDSMAX','Status','Query Device Status Max','No'],['0x2C','PEXSN','Steady','Page Exit Sensor Notification','No'],['0x2D','QDBSR','Config','Query Device BSR','No'],['0x2E','QDMIG','Steady','Query DM Inter-Page Gap','No'],['0x2F','QPTE','Steady','Query Pick Time Estimate','No'],
+ ['0x40','QMSCS','Bluejay','Query MSCS','No'],['0x41','MTN','Bluejay','Motor Tuning Notification','Yes'],['0x80','ADA','Sync','Assign Device Address','Yes'],['0x81','PCN','Config','Page Count Notification','Yes'],['0x82','QDPT','Status','Query Device Paper Transport','Yes'],['0x83','QDMG','Status','Query Distance Motor Gap','Yes'],['0x84','PIRN','Status','Page IR Notification','Yes'],['0x85','SID','Steady','Set Initial Destination','Yes'],
+ ['0x86','SOD','Steady','Set Output Destination','Yes'],['0x87','SPS','Steady','Set Paper Speed','Yes'],['0x88','TLN','Misc','Tray Level Notification','Yes'],['0x89','DT','Diag','Diagnostic Test','Yes'],['0x8A','QDC','Config','Query Device Configuration','Yes'],['0x8B','QDI','Config','Query Device Information','Yes'],['0x8D','QPPC','Config','Query Paper Path Configuration','Yes'],['0x8E','QPPS','Status','Query Paper Path Status','Yes'],['0x8F','BCME','Steady','Bypass Copy Media Exit','Yes'],
+ ['0x91','MSN','Misc','Motor Speed Notification','Yes'],['0x92','DOC','Steady','Document Output Command','Yes'],['0x93','RDN','Misc','Read from NVRAM','Yes'],['0x94','WDN','Misc','Write to NVRAM','Yes'],['0x97','SLPQ','Bluejay','Submit/Set Line Page Queue','Yes'],['0x99','QDXX','Steady','Query Diagnostic XX','Yes'],['0xA0','EAE','Bluejay','Enable/Abort Excitation','Yes'],['0xA1','RDLD','Bluejay','Read Load Data','Yes'],['0xA2','DLDB','Bluejay','Download Data Block','Yes'],
+ ['0xA3','DLDC','Bluejay','Download Data Complete','Yes'],['0xA4','PTC','Steady','Paper Transport Control','Yes'],['0xA5','TS','Bluejay','Timestamp','Yes'],['0xA6','QSPDD','Bluejay','Query Speed Diagnostic Data','Yes'],['0xB0','ICP','Bluejay','Input Calibration Position','Yes'],['0xB1','DETS','Bluejay','Device Error Timestamp','Yes'],['0xB2','MSADTO','Bluejay','Motor Speed Accel/Decel Timeout','Yes'],['0xB3','SIDX','Bluejay','Set Index Direction','Yes'],
+ ['0xB5','ILN','Steady','Interleaf Notification','Yes'],['0xB6','LIN','Steady','Load Interleaf Notification','Yes'],['0xB7','LIP','Steady','Load Interleaf Paper','Yes'],['0xB8','SCP','Steady','Switch Copy Path','Yes'],['0xBA','PTEN','Bluejay','Paper Transport Enable','Yes'],['0xBB','QHCD','Bluejay','Query HCD','Yes'],['0xBC','QNC','Bluejay','Query Number of Copies','Yes'],['0xFC','PP_ERROR','—','PaperPort Error Response','No'],['0xFD','SMC','Misc','Set Motor Control','No'],['0xFE','SDC','Misc','Set Device Configuration','No'],['0xFF','CER','Misc','Clear Error Report','No']
+];
+function renderOpcodeTable(){
+ const query=$('opcodeSearch').value.trim().toLowerCase();
+ const matches=OPCODES.filter(op=>!query||op.join(' ').toLowerCase().includes(query));
+ $('opcodeBody').innerHTML=matches.length?matches.map(op=>`<tr><td class="reference-code">${op[0]}</td><td><b>${op[1]}</b></td><td><span class="reference-badge">${op[2]}</span></td><td>${op[3]}</td><td>${op[4]}</td></tr>`).join(''):'<tr><td colspan="5" class="reference-empty">No matching commands.</td></tr>';
+ $('opcodeCount').textContent=`${matches.length} of ${OPCODES.length} commands`;
+}
+function parsedHex(input){
+ const value=input.trim().replace(/^0x/i,'');
+ if(!value||!/^[\da-f]+$/i.test(value)||value.length>8)return null;
+ return Number.parseInt(value,16);
+}
+function result(id,text,invalid=false){
+ const element=$(id);element.textContent=text;element.classList.toggle('invalid',invalid);
+}
+function byteHex(value){
+ return `0x${Number(value).toString(16).padStart(2,'0').toUpperCase()}`;
+}
+function convertPTC(){
+ const value=$('convPTC').value;
+ if(!value.trim()){result('convPTCResult','');return}
+ const raw=parsedHex(value);
+ if(raw===null){result('convPTCResult','Enter a valid 1–8 digit hexadecimal value.',true);return}
+ const speed=raw*.0625;
+ result('convPTCResult',`${speed.toFixed(2)} mm/s · about ${(speed/5.4).toFixed(1)} ppm`);
+}
+function convertSPS(){
+ const value=$('convSPS').value;
+ if(!value.trim()){result('convSPSResult','');return}
+ const digits=value.trim().replace(/^0x/i,'');
+ if(!/^[\da-f]+$/i.test(digits)||digits.length>8){result('convSPSResult','Enter a valid 1–8 digit hexadecimal value.',true);return}
+ const parsed=Number.parseInt(digits,16);
+ const raw=digits.length<=4?parsed:(parsed>>>8)&0xffff;
+ result('convSPSResult',`Raw ${raw} · ${(raw/16).toFixed(3)} mm/s`);
+}
+function convertQDMG(){
+ const value=$('convQDMG').value;
+ if(!value.trim()){result('convQDMGResult','');return}
+ const parsed=parsedHex(value);
+ if(parsed===null){result('convQDMGResult','Enter a valid 1–8 digit hexadecimal value.',true);return}
+ const b2=(parsed>>>16)&255,b3=(parsed>>>8)&255;
+ result('convQDMGResult',`Gap ${((b2<<8)|b3).toLocaleString()} encoder units · B2 ${byteHex(b2)} · B3 ${byteHex(b3)}`);
+}
+function convertHex(){
+ const value=$('convHex').value;
+ if(!value.trim()){result('convHexResult','');return}
+ const parsed=parsedHex(value);
+ result('convHexResult',parsed===null?'Enter a valid 1–8 digit hexadecimal value.':`= ${parsed.toLocaleString()} decimal`,parsed===null);
+}
+function convertDecimal(){
+ const value=$('convDec').value.trim();
+ if(!value){result('convDecResult','');return}
+ if(!/^\d+$/.test(value)||Number(value)>0xffffffff){result('convDecResult','Enter an unsigned integer from 0 to 4,294,967,295.',true);return}
+ result('convDecResult',`= 0x${Number(value).toString(16).toUpperCase()}`);
+}
+function convertTimeDistance(){
+ const speedText=$('convSpeed').value.trim(),timeText=$('convTime').value.trim(),distText=$('convDist').value.trim();
+ const speed=Number(speedText),time=Number(timeText),distance=Number(distText);
+ result('convTDResult1',speedText&&timeText&&Number.isFinite(speed)&&speed>0&&Number.isFinite(time)&&time>=0?`→ ${(time*speed/1000).toFixed(3)} mm`:speedText&&timeText?'Check positive speed and non-negative time.':'',Boolean(speedText&&timeText&&(!Number.isFinite(speed)||speed<=0||!Number.isFinite(time)||time<0)));
+ result('convTDResult2',speedText&&distText&&Number.isFinite(speed)&&speed>0&&Number.isFinite(distance)&&distance>=0?`→ ${(distance*1000/speed).toFixed(1)} ms`:speedText&&distText?'Check positive speed and non-negative distance.':'',Boolean(speedText&&distText&&(!Number.isFinite(speed)||speed<=0||!Number.isFinite(distance)||distance<0)));
+}
+const MEDIA_SIZES={LGL:'215.9 × 355.6 mm',LTR:'215.9 × 279.4 mm',A4:'210 × 297 mm',A5:'148 × 210 mm',B5:'182 × 257 mm',A3:'297 × 420 mm',B4:'257 × 364 mm',EXEC:'184.2 × 266.7 mm',FOLIO:'209.6 × 355.6 mm',OFICIO:'215.9 × 355.6 mm',DLT:'279.4 × 431.8 mm','12×18':'304.8 × 457.2 mm',SRA3:'320 × 450 mm',A6:'105 × 148 mm',B6:'128 × 182 mm'};
+function convertMedia(){
+ const value=$('convMedia').value.trim().toUpperCase();
+ result('convMediaResult',value?(MEDIA_SIZES[value]||'Unknown media size code.'):'',Boolean(value&&!MEDIA_SIZES[value]));
+}
+function decodeSLPQ(){
+ const value=$('convSLPQ').value;
+ const output=$('convSLPQResult');
+ if(!value.trim()){output.innerHTML='';return}
+ const parsed=parsedHex(value);
+ if(parsed===null){output.textContent='Enter a valid 1–8 digit hexadecimal value.';output.classList.add('invalid');return}
+ output.classList.remove('invalid');
+ const b1=(parsed>>>24)&255,b2=(parsed>>>16)&255,b3=(parsed>>>8)&255,b4=parsed&255;
+ const subcmd=['Submit New Page','Update Last Page','Remove Last Page'];
+ const pos={0:'Default',1:'Left/Front',2:'Right/Rear'};
+ const acc={0:'Do NOT accumulate',1:'Accumulate'};
+ const punch={0:'No punch',1:'NA 3-hole',2:'ISO 2-hole',3:'US 2-hole',4:'ISO 4-hole'};
+ const staple={0:'No staple',1:'TopRight Diag',2:'TopLeft Diag',11:'Top Left',12:'Top Dual',13:'Left Dual',14:'Top Right',15:'Landscape Dual Top',16:'Landscape Dual Left'};
+ const fold={0:'No fold',1:'Bi-fold',2:'Booklet',3:'C-trifold',4:'Z-trifold',5:'Z-fold'};
+ const route={1:'Simplex',2:'Duplex',3:'Finisher',11:'TopLeft',12:'TopDual',13:'LeftDual',14:'TopRight'};
+ const sub=b1&15,stapleMode=b1>>4,position=b2&3,accumulate=(b2>>2)&1,holePunch=(b2>>4)&7,foldMode=(b2>>6)&3;
+ output.innerHTML=`<b>Sub-command:</b> ${esc(subcmd[sub]||`Unknown (${sub})`)} · <b>Page:</b> ${b3} · <b>Route:</b> ${esc(route[b4]||`Route ${b4}`)}<br><b>Position:</b> ${esc(pos[position]||`Value ${position}`)} · <b>Accumulate:</b> ${esc(acc[accumulate])}<br><b>Hole punch:</b> ${esc(punch[holePunch]||`Value ${holePunch}`)} · <b>Staple:</b> ${esc(staple[stapleMode]||`Value ${stapleMode}`)}<br><b>Fold:</b> ${esc(fold[foldMode]||`Value ${foldMode}`)}`;
+}
+renderOpcodeTable();
 
 const NTCLI_SECTIONS=[
   {key:'settings',title:'Settings',icon:'⚙',description:'Identity, configuration, and supported capabilities'},
@@ -658,13 +810,45 @@ function renderTimeline(page){
  const values=STAGES.map(([k])=>page.stages?.[k]?.time).filter(v=>v!=null),start=page.start??(values.length?Math.min(...values):null),end=page.end??(values.length?Math.max(...values):null);
  if(start==null){$('timeline').innerHTML='<div class="empty">Selected page has no timestamped stage evidence yet.</div>';renderPageHistory();return}
  const span=Math.max(.01,((end??start)-start)||.01); $('timelinePage').textContent=`${page.pageIdHex} · ${page.status}`;
+ const timeline=$('timeline');
+ timeline.dataset.timeStart=String(start);timeline.dataset.timeEnd=String(end??start);
  let html='<div class="time-grid"><div class="time-label">STAGE</div><div class="time-head">';
  for(let t=0;t<=4;t++){const x=t/4;html+=`<span class="axis-tick" style="left:${x*100}%">${fmt(start+span*x,3)}s</span>`} html+='</div></div>';
  for(const [k,label] of STAGES){
    const st=page.stages?.[k]; const pos=st?.time==null?null:Math.max(0,Math.min(100,((st.time-start)/span)*100));
-   html+=`<div class="lane"><div class="lane-name">${esc(label)}</div><div class="lane-track"><span class="startline" style="left:0"></span><span class="endline" style="left:100%"></span>${pos!=null?`<span class="event-dot ${(st.status||'UNKNOWN').toLowerCase()}" title="${esc(label)}" onclick='selectPage("${page.pageIdHex}",true)' style="left:${pos}%"></span>`:''}</div></div>`;
+   const pointTitle=st?`${label} · ${fmt(st.time,3)} s · ${st.ipeMm==null?'event, no IPE':`${st.ipeMm>=0?'+':''}${fmt(st.ipeMm)} mm · ${st.status||'UNKNOWN'}`}`:'';
+   html+=`<div class="lane"><div class="lane-name">${esc(label)}</div><div class="lane-track"><span class="startline" style="left:0"></span><span class="endline" style="left:100%"></span>${pos!=null?`<span class="event-dot ${(st.status||'UNKNOWN').toLowerCase()}" data-time="${Number(st.time)}" data-stage="${esc(label)}" data-status="${esc(st.status||'EVENT')}" title="${esc(pointTitle)}" aria-label="${esc(pointTitle)}" tabindex="0" onclick='selectPage("${page.pageIdHex}",true)' style="left:${pos}%"><span class="timeline-point-label ${pos>72?'right':''}">${esc(label)} · ${fmt(st.time,3)}s</span></span>`:''}</div></div>`;
  }
+ html+='<div class="timeline-guide" aria-hidden="true"><span class="timeline-guide-label"></span></div>';
  $('timeline').innerHTML=html; renderPageHistory();
+}
+function showTimelineGuide(event,dot){
+ const timeline=$('timeline'),guide=timeline.querySelector('.timeline-guide'),label=guide?.querySelector('.timeline-guide-label');
+ const axis=timeline.querySelector('.time-head');
+ if(!guide||!label||!axis)return;
+ const timelineRect=timeline.getBoundingClientRect(),axisRect=axis.getBoundingClientRect();
+ let x,time,text;
+ if(dot){
+   const dotRect=dot.getBoundingClientRect();
+   x=dotRect.left+dotRect.width/2-timelineRect.left;
+   time=Number(dot.dataset.time);
+   text=`${dot.dataset.stage} · ${fmt(time,3)} s`;
+   if(dot.dataset.status)text+=` · ${dot.dataset.status}`;
+ }else{
+   const ratio=Math.max(0,Math.min(1,(event.clientX-axisRect.left)/axisRect.width));
+   x=axisRect.left-timelineRect.left+ratio*axisRect.width;
+   const start=Number(timeline.dataset.timeStart),end=Number(timeline.dataset.timeEnd);
+   time=start+(end-start)*ratio;
+   text=`Time ${fmt(time,3)} s`;
+ }
+ guide.style.left=`${Math.max(0,Math.min(timelineRect.width,x))}px`;
+ const labelWidth=label.getBoundingClientRect().width;
+ label.style.transform=x<labelWidth/2+6?'translateX(0)':x>timelineRect.width-labelWidth/2-6?'translateX(-100%)':'translateX(-50%)';
+ label.textContent=text;
+ guide.classList.add('show');
+}
+function hideTimelineGuide(){
+ $('timeline').querySelector('.timeline-guide')?.classList.remove('show');
 }
 function renderPageSummary(){
  const p=(live.pages||[]).find(x=>x.pageIdHex===selectedPageId)||(live.pages||[])[0];
